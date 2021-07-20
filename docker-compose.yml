@@ -10,6 +10,11 @@ services:
             - 5672:5672
             - 15692:15692
             - 15672:15672
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:15672"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
 
     webhook-api:
         build: ./webhook-api/
@@ -30,6 +35,7 @@ services:
             - ./webhook-consumer/src:/home/node/webhook-consumer/src
         depends_on: 
             - rabbitmq
+            - webhook-api
             
     
     
