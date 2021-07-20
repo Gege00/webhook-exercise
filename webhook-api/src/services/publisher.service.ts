@@ -1,11 +1,12 @@
-import * as amqplib from 'amqplib';
-import { debug } from 'util';
+import * as amqplib from "amqplib";
 
 const AMQP_ADDRESS = "amqp://rabbitmq?heartbeat=60";
 
+//URI for local use
+// const AMQP_ADDRESS = "amqp://localhost:5672?heartbeat=60"
+
 export async function sendMessage(message: QueueMessage): Promise<boolean> {
   try {
-  
     const connection = await amqplib.connect(AMQP_ADDRESS);
     const channel = await connection.createChannel();
 
@@ -22,8 +23,6 @@ export async function sendMessage(message: QueueMessage): Promise<boolean> {
     await connection.close();
     return true;
   } catch (e) {
-    console.log(e);
-    console.log("**asdsd*");
     return false;
   }
 }

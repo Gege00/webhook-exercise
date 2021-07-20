@@ -27,19 +27,14 @@ const startConsumer = async () => {
       "webhook_trigger",
       async (message) => {
         try {
-      
           var webhook = JSON.parse(message.content);
 
-  
-          const data={ token, payload } = webhook;
-         
-          const res = await superagent
-          .post(webhook.url)
-          .send(data)
+          const data = ({ token, payload } = webhook);
+
+          const res = await superagent.post(webhook.url).send(data);
 
           //do something with the response
           //log it, queue it, process it whatever
-          console.log(res.statusCode)
           ch.ack(message);
         } catch (e) {
           //if any error occurs, should I cancel the request or ack it???

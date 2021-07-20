@@ -10,21 +10,10 @@ import * as services from "../../services/publisher.service";
 describe("U: WebhookController", () => {
   let webHooks: Array<Webhook>;
   let webHookController = new WebhookController();
-  let sendMessageStub:SinonStub;
+  let sendMessageStub: SinonStub;
   before(() => {
     sendMessageStub = sinon.stub(services, "sendMessage").resolves();
     webHooks = new Array<Webhook>();
-    // webHooks= new Array<Webhook>(
-    //  {
-    //   url:"test-url-0",
-    //   token: "test-token-0"
-    // },
-    // {
-    //   url:"test-url-1",
-    //   token: "test-token-1"
-    // },
-
-    // )
   });
 
   afterEach(() => {
@@ -32,9 +21,9 @@ describe("U: WebhookController", () => {
     webHookController = new WebhookController();
   });
 
-  after(()=>{
-    sendMessageStub.restore()
-  })
+  after(() => {
+    sendMessageStub.restore();
+  });
 
   describe("registerWebhook", () => {
     it("return the passed body", async () => {
@@ -54,15 +43,11 @@ describe("U: WebhookController", () => {
 
         { url: "test-url-1", token: "test-token-1" }
       );
-      const result = await webHookController.testWebhook(webHooks,
-        {
-        payload: ["any", { valid: "JSON" }]
-        });
+      const result = await webHookController.testWebhook(webHooks, {
+        payload: ["any", { valid: "JSON" }],
+      });
 
-        expect(result).to.equal(2);
+      expect(result).to.equal(2);
     });
   });
 });
-
-
-
