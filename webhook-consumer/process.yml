@@ -1,6 +1,6 @@
 apps:
   - script : ./src/app.js
-    restart_delay: 100
+    restart_delay: 300
     autorestart: true
     watch : true
     watch_options:

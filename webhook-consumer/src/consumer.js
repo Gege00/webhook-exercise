@@ -18,6 +18,7 @@ const startConsumer = async () => {
     const ch = await conn.createChannel();
 
     ch.on("error", function (error) {
+      conn.close()
       throw new Error("[AMQP] conn error", error.message);
     });
 
@@ -27,11 +28,12 @@ const startConsumer = async () => {
       "webhook_trigger",
       async (message) => {
         try {
+          
           var webhook = JSON.parse(message.content);
+          console.log(webhook);
+          const{ token, payload } = webhook;
 
-          const data = ({ token, payload } = webhook);
-
-          const res = await superagent.post(webhook.url).send(data);
+          const res = await superagent.post(webhook.url).send({token,payload});
 
           //do something with the response
           //log it, queue it, process it whatever
