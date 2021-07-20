@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        container_name: rabbitmq
+
+        ports:
+            - 5672:5672
+            - 15692:15692
+            - 15672:15672
+
+    webhook-api:
+        build: ./webhook-api/
+        volumes:
+            - ./webhook-api/src:/home/node/webhook-api/src
+            - ./webhook-api/nodemon.json:/home/node/webhook-api/nodemon.json
+        container_name: webhook-api
+        expose:
+            - '9876'
+        ports:
+            - '9876:9876'
+   
+
+    webhook-consumer:
+        build: ./webhook-consumer/
+        container_name: webhook-consumer
+        volumes:
+            - ./webhook-consumer/src:/home/node/webhook-consumer/src
+        depends_on: 
+            - rabbitmq
+            
+    
+    
