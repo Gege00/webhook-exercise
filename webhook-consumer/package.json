@@ -1,0 +1,22 @@
+{
+  "name": "webhook-consumer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "amqplib-mocks": "^1.3.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.2",
+    "proxyquire": "^2.1.3",
+    "sinon": "^11.1.1"
+  }
+}
