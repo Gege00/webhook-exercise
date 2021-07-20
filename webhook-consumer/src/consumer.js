@@ -30,7 +30,7 @@ const startConsumer = async () => {
         try {
           
           var webhook = JSON.parse(message.content);
-          console.log(webhook);
+      
           const{ token, payload } = webhook;
 
           const res = await superagent.post(webhook.url).send({token,payload});
